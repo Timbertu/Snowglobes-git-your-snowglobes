@@ -34,8 +34,7 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    #importing views module here to avoid circular references
-    # a commonly used practice.
+    #importing views modules 
     from . import listings
     app.register_blueprint(listings.bp)
 

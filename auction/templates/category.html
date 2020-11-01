@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block header %}
-<h1>Fancy</h1>
+{% block header %} 
+<h1>{{heading}}</h1>
 {% endblock %}
 
 {% block content %}
@@ -9,8 +9,7 @@
 {% if listings %}
 
 <div class="row justify-content-center">
-
-
+<!-- this creates a loop to display the items listed for each category -->
     {% for listing in listings %}
     <div class="card mb-3 mr-5" style="width: 18rem;">
         <img class="card-img-top" height="200rem" src="{{listing.image}}" alt="{{listing.name}}">

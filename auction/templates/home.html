@@ -8,17 +8,11 @@
         <img src="static/image/greyland.png" class="card-img" alt="Greyed Out snowglobe">
         <div class="card-img-overlay">
           <h1 class="card-title" id="pad-top">Welcome to GlobeMarket!</h1>
-          <div id="card-shade">
-            <p class="card-text">Welcome to GlobeMarket, the biggest snowglobe auction website for the class of IAB207!
-              At GlobeMarket we work to give you the best experience possible for buying, selling, or exploring the
-              world of
-              snowglobes! Make a selection of one of the below buttons to get started, or search for an item in the
-              search bar!
-              If you'd like to stay here a little longer, check out some of the trending items below those fancy
-              buttons.
-            </p>
-          </div>
         </div>
+        <p>Welcome to GlobeMarket, the biggest snowglobe auction website for the class of IAB207!
+          At GlobeMarket we work to give you the best experience possible for buying, selling, or exploring the
+          world of snowglobes!
+        </p>
       </div>
     </div>
     <hr>
@@ -26,6 +20,7 @@
 </div>
 {% endblock %}  
 {% block content %}
+<!-- Create container -->
 <div class="container" style="background-color: white;">
   <div class="row">
     <div class="col">
@@ -44,27 +39,44 @@
           {% if listings %}
           <div class="row justify-content-center">
             {% for listing in listings %}
-
+            
             <div class="card mb-3 mr-5" style="width: 18rem;">
-              <img class="card-img-top" height="200rem" src="{{listing.image}}" alt="{{listing.name}}">
+              <img class="card-img-top" height="250rem" src="{{listing.image}}" alt="{{listing.name}}">
               <div class="card-body">
                 <h5 class="card-title">{{listing.name}}</h5>
-                <h6>Bids: <span class="badge badge-secondary" style="font-size:14px;">9</span>
+                <h6>Bids: <span class="badge badge-secondary" style="font-size:14px;"></span>
                 </h6>
-                <h6>Current Highest Bid: <span class="badge badge-secondary" style="font-size:14px;">$130</span> </h6>
+                <h6>Current Highest Bid: <span class="badge badge-secondary" style="font-size:14px;">{{listing.startbid}}</span> </h6>
                 <!-- <p class="card-text">{{listing.description}}</p> -->
                 <div id="testcentre"><a href="{{url_for('listing.show', id=listing.id)}}"
                     class="btn btn-primary mt-3">Go
                     to this item!</a></div>
               </div>
               <div class="card-footer">
-                <medium class="text-muted">Auction Closed</medium>
+                <medium class="text-muted">
+                  {% if listing.status == True %}
+                    Auction Open
+                  {% else %}
+                    Auction Closed
+                  {% endif %}
+                </medium>
               </div>
             </div>
 
             {% endfor %}
 
             {% endif %}
+
+</div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+</div>
 
           </div>
 
@@ -79,6 +91,7 @@
 </div>
 {% endblock %}
       <div id="bottomgap" style="background-color: white;">
+        <!-- Create Footer -->
         <footer>
           <div class="container">
             <div class="row">

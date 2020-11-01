@@ -27,10 +27,11 @@ def login():
         elif not check_password_hash(u1.password_hash, password): # takes the hash and password
             error='Incorrect password'
         if error is None:
-            #all good, set the login_user of flask_login to manage the user
+            #if no errors, set the login_user of flask_login to manage the user
             login_user(u1)
             return redirect(url_for('main.index'))
         else:
+            #if error occurs 
             flash(error)
     #render the login page using user.html as a template 
     return render_template('user.html', form=login_form, heading='Login')
@@ -41,20 +42,20 @@ def login():
 def register():
     #import the RegisterForm() from forms.py 
     register = RegisterForm()
-    #the validation of form submis is fine
+    #the validation of the form is fine
     if (register.validate_on_submit() == True):
-            #get username, password and email from the form
+            #get username, password, email, phone number and address from the form
             uname=register.user_name.data
             pwd=register.password.data
             email=register.email_id.data
             phnum=register.contact_num.data
             addrs=register.address.data
-            #check if a user with the same username already exists
+            #check if a user with the same username already exists, flash error message if it does 
             u1 = User.query.filter_by(name=uname).first()
             if u1:
                 flash('User name already exists, please login')
                 return redirect(url_for('auth.login'))
-            # don't store the password - create password hash
+            #generate password hash 
             pwd_hash = generate_password_hash(pwd)
             #create a new user model object
             new_user = User(name=uname, password_hash=pwd_hash, emailid=email, contact_num=phnum, address=addrs)
@@ -62,7 +63,7 @@ def register():
             db.session.commit()
             #commit to the database and redirect to HTML page
             return redirect(url_for('main.index'))
-    #the else is called when there is a get message
+    #the else is called when there is a GET message
     else:
         return render_template('user.html', form=register, heading='Register')
 

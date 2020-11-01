@@ -4,6 +4,7 @@
 {% block content %}
 <div class="container" id="buffergrid" style="background-color: white;">
     <div class="row">
+    <!--Insert listing attributes and information-->
     <div class="col"><img src="{{listing.image}}" width="500" height="500"></div>
     <div class="col">
         <div class="container" id="bordergrid">
@@ -28,10 +29,19 @@
             <div class="col"><b>Description:</b> {{listing.description}}
             </div>
             <div class="w-100"></div>
-            <div class="col" id="padupbtn"><h4>Current bid: {{bids.sub_bid}}</h4>
+            <div class="col" id="padupbtn"><h4>Current bid: {{showbid}}</h4>
             <p>Starting bid was ${{listing.startbid}}</p></div>
             <div class="w-100"></div>
-            <div class="col" id="padupbtn"><button type="button" class="btn btn-primary">{{wtf.quick_form(watchform)}}</button></div>
+            <!-- If the current user did not posted the listing they can add and remove the item to/from their wathclist -->
+            {% if listing.upost != current_user.name %}
+                {% if listing.status == True %}
+                    <div class="col" id="padupbtn"><button type="button" class="btn btn-success">{{wtf.quick_form(watchform)}}</button></div>
+                {% else %}
+                    <div class="col" id="padupbtn"><h1>Auction Closed</h1>
+                {% endif %}
+            {% else %}
+            
+            {% endif %}
             <div class="w-100"></div>
             <div class="col" id="padup">Posted: {{listing.created_at}}</div>
         </div>
@@ -39,7 +49,70 @@
     </div>
     
 </div>
-{{wtf.quick_form(bidform)}}
+<div id="padup">
+    <!-- If the current user uploaded the listing they can view the listings bid history -->
+{% if listing.upost == current_user.name %}
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    View Bid History:
+                </button>
+                </h2>
+            </div>
+        <!-- Bid history formatting -->
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% if tablebid %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                    <th scope="col">Bidder's Username</th>
+                                    <th scope="col">Bid Amount</th>
+                                    <th scope="col">Bid Date</th>
+                            </tr>
+                            </thead>
+                            {% for bid in tablebid %}
+                                <tbody>
+                                <tr>
+                                    <th scope="row">{{bid.usr_name}}</th>
+                                    <td>{{bid.sub_bid}}</td>
+                                    <td>{{bid.created_at}}</td>
+                                </tr>
+                                </tbody>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                    <h2 class='nobids'>Aw. no one has made a bid yet. Head up champ, they'll buy it soon.</h2>
+                    {% endif %}
+                    {% if listing.status == True %}
+                        <h1>Auction Open</h1>
+                    {% else %}
+                        <h1>Auction Closed</h1>
+                    {% endif %}
+                </div>
+            </div>
+            <button type="button" class="btn btn-warning">{{wtf.quick_form(closeform)}}</button>
+            </div>
+        </div>
+{% else %}
+    {% if listing.status == True %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li><u><b>{{ message }}</b></u></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {{wtf.quick_form(bidform)}}
+    {% else %}
+        <h1>Bidding time is over, you missed it.</h1>
+    {% endif %}
+{% endif %}
+</div>
 </div>
 </div>
 {% endblock %}

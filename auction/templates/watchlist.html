@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block header %}
+
+<!-- Jumbotron for Watchlist Heading -->
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4">Your Watchlist</h1>
@@ -9,32 +11,36 @@
 {% endblock %}
 
 {% block content %}
-{% if watchlist %}
-{% for listing in watchlist %}
-  <div class="container">
-    <div class="row">
-      <div class="col" id="colbuff">
-        <div class="card mb-3" style="max-width: 100%">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="static/image/deer.png" class="card-img" alt="Deer Snowglobe" style="width: 18rem">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h1 class="card-title">Deer Snowglobe</h1>
-                <h3 class="card-text">Bid status: 57 bids, highest bid currently at $258</h3>
-                <p class="card-text"><small class="text-muted">Added 13/09/2020</small></p>
-                <a role="button" class="btn btn-danger" href="watchlist.html">Remove Item</a>
-                <a role="button" class="btn btn-success" href="listing/">Go to Item</a>
-              </div>
-            </div>
-          </div>
+<!-- Create container for content -->
+<div class="container" style="background-color: lightgrey; border-radius: 5px; padding: 20px">
+  <div class="row">
+<!-- If there is an item in the users watchlist, display all added watchlist items -->
+    {% if item %}
+    <div class="row justify-content-center">
+      {% for watcher in item %}
+      <!-- Create card for watchlist items -->
+      <div class="card mb-3 mr-5" style="width: 18rem;">
+        <img class="card-img-top" height="200rem" src="{{watcher.image}}" alt="{{listing.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{watcher.name}}</h5>
+          <h6>Bids: <span class="badge badge-secondary" style="font-size:14px;">0</span>
+          </h6>
+          <h6>Current Highest Bid: <span class="badge badge-secondary" style="font-size:14px;">{{showbid}}</span> </h6>
+          <!-- <p class="card-text">{{listing.description}}</p> -->
+          <div id="testcentre"><a href="{{url_for('listing.show', id=listing.id)}}"
+              class="btn btn-primary mt-3">Go
+              to this item!</a></div>
+        </div>
+        <div class="card-footer">
+          <medium class="text-muted">Auction Closed</medium>
         </div>
       </div>
-      <div class="w-100"></div>
+
+      {% endfor %}
+
+      {% endif %}
+
     </div>
+
   </div>
-</div>
-{% endfor %}
-{% endif %}
 {% endblock %}

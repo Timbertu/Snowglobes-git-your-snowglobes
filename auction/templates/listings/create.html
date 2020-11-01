@@ -2,12 +2,13 @@
 
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-  <div class="container">
+  <div class="container" style="background-color: #DDDDDD;">
     <div class="row mt-5">
       <div class="col-md-12">
 
         <h1>Add Item Listing</h1>
 
+        <!-- Grab Create form from forms.py -->
         {{wtf.quick_form(form)}}
         
       </div>

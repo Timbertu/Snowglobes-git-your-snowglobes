@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-
+<div class="container" style="background-color: #DDDDDD;">
     <div class="page-header">
         <h4>{{heading}}</h4>
     </div>
 
 
-
+    <!-- Create container -->
     <div class="container-fluid">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -24,15 +24,16 @@
 
 
 
-    <!-- Form rendering is simple and easy if using bootstrap -->
+    <!-- Render form (either login or register) -->
     <div class="col-md-6">
     {{wtf.quick_form(form)}}
     </div>
 
-    <!-- When you have login form, then do show the user a link to register -->
+    <!-- When rendering the login form, show the user a link to register -->
     {% if heading|lower =='login' %}
     <div class="col-md-4">
         <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
     </div>
     {% endif %}
+</div>
 {% endblock %}

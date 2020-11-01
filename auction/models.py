@@ -2,6 +2,7 @@ from . import db
 from datetime import datetime
 from flask_login import UserMixin
 
+#Create User database model, define attributes 
 class User(db.Model, UserMixin):
     __tablename__='users'
     id = db.Column(db.Integer, primary_key=True)
@@ -11,6 +12,7 @@ class User(db.Model, UserMixin):
     contact_num = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String(255), nullable=False)
 
+#Create Listing database model, define attributes 
 class Listing(db.Model):
     __tablename__ = 'listings'
     id = db.Column(db.Integer, primary_key=True)
@@ -30,21 +32,27 @@ class Listing(db.Model):
     def __repr__(self): #string print method
         return "<Name: {}>".format(self.name)
 
+#Create Bidding database model, define attributes 
 class Bidding(db.Model):
     __tablename__ = 'bids'
     id = db.Column(db.Integer, primary_key=True)
     sub_bid = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
-    usr_id = db.Column(db.String(100), db.ForeignKey('users.id'), nullable=False)
+    usr_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    usr_name = db.Column(db.String(100), db.ForeignKey('users.name'), nullable=False)
     lis_id = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable=False)
 
     def __repr__(self): #string print method
-        return "<Bid: {}>".format(self.name)
+        return "${}".format(self.sub_bid)
 
+#Create Watchlist database model, define attributes 
 class Watchlist(db.Model):
     __tablename__ = 'watching'
     id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(100), db.ForeignKey('users.name'), nullable=False)
     added_at = db.Column(db.DateTime, default=datetime.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     list_id = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable=False)
+
+    def __repr__(self): #string print method
+        return "User: {}".format(self.id)
     
