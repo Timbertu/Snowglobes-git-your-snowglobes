@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Your Watchlist</h1>
+      <p class="lead">This is where you find all the auctions you are monitoring! Feel free to add as many as you'd like.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if watchlist %}
+{% for listing in watchlist %}
+  <div class="container">
+    <div class="row">
+      <div class="col" id="colbuff">
+        <div class="card mb-3" style="max-width: 100%">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="static/image/deer.png" class="card-img" alt="Deer Snowglobe" style="width: 18rem">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h1 class="card-title">Deer Snowglobe</h1>
+                <h3 class="card-text">Bid status: 57 bids, highest bid currently at $258</h3>
+                <p class="card-text"><small class="text-muted">Added 13/09/2020</small></p>
+                <a role="button" class="btn btn-danger" href="watchlist.html">Remove Item</a>
+                <a role="button" class="btn btn-success" href="listing/">Go to Item</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100"></div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

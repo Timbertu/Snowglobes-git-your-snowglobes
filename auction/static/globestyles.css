@@ -1,0 +1,97 @@
+nav{
+    background-color: #DDDDDD;
+    border-bottom-color: #CCC;
+    border-bottom-style: solid;
+    border-bottom-width: 0.05;
+}
+#buffer{
+    padding-bottom: 1%;
+}
+#gridc{
+    width: 100%;
+    text-align: center;
+}
+#gridsp{
+    width: 100%;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 2%;
+}
+#card-shade{
+    background-color: #555555;
+    opacity: 0.7;
+    border-radius: 0.2cm;
+}
+#card-shade p{
+    color: #FFFFFF;
+}
+#pad-top{
+    padding-bottom: 33.5%;
+}
+#caroback{
+    background-color: #AAA;
+    padding-left: 3.5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-radius: 0.2cm;
+}
+#bottomgap{
+    padding-top: 2%;
+}
+footer{
+    background-color: #DDD;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.fotext{
+    font-size: small;
+}
+.cptext{
+    font-weight: bold;
+}
+.title{
+    text-align: center;
+}
+.wltitle{
+    font-size: 55px;
+    font-variant: small-caps;
+}
+#colbuff{
+    padding-bottom: 2%;
+}
+.bannertitle{
+    padding-bottom: 1%;
+    padding-top: 1%;
+    text-align: center;
+}
+#buffergrid{
+    padding-top: 2%;
+}
+#padup{
+    color: grey;
+    padding-top: 3%;
+    font-size: 15px;
+    padding-bottom: 1%;
+}
+#spacer{
+    padding: 2%;
+}
+#padupbtn{
+    padding-top: 4%;
+    text-align: center;
+}
+#paddown{
+    padding-bottom: 2%;
+}
+#bordergrid{
+    border-style: solid;
+}
+#submitlistbtn{
+    padding-top: 18%;
+    text-align: center;
+}
+#testcentre{
+    text-align: center;
+}

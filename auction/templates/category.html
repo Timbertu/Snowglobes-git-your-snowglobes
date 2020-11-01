@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>Fancy</h1>
+{% endblock %}
+
+{% block content %}
+
+{% if listings %}
+
+<div class="row justify-content-center">
+
+
+    {% for listing in listings %}
+    <div class="card mb-3 mr-5" style="width: 18rem;">
+        <img class="card-img-top" height="200rem" src="{{listing.image}}" alt="{{listing.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{listing.name}}</h5>
+          <h6>Bids: <span class="badge badge-secondary" style="font-size:14px;">9</span>
+          </h6>
+          <h6>Current Highest Bid: <span class="badge badge-secondary" style="font-size:14px;">$130</span> </h6>
+          <!-- <p class="card-text">{{listing.description}}</p> -->
+          <div id="testcentre"><a href="{{url_for('listing.show', id=listing.id)}}"
+              class="btn btn-primary mt-3">Go
+              to this item!</a></div>
+        </div>
+        <div class="card-footer">
+          <medium class="text-muted">Auction Closed</medium>
+        </div>
+      </div>
+
+
+    {% endfor %}
+
+</div>
+
+
+
+{% endif %}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="container" id="buffergrid" style="background-color: white;">
+    <div class="row">
+    <div class="col"><img src="{{listing.image}}" width="500" height="500"></div>
+    <div class="col">
+        <div class="container" id="bordergrid">
+        <div class="row">
+            <div class="col">
+            <div class="bannertitle">
+                <h1 class="display-4">{{ listing.name }}</h1>
+                <h5>Posted by: {{ listing.upost }}</h5>
+            </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col"><b>Size:</b> {{listing.size}}</div>
+            <div class="w-100"></div>
+            <div class="col"><b>Location of Origin:</b> {{listing.origin}}</div>
+            <div class="w-100"></div>
+            <div class="col"><b>Colour:</b> {{listing.colour}}</div>
+            <div class="w-100"></div>
+            <div class="col"><b>Age (years):</b> {{listing.age}} </div>
+            <div class="w-100"></div>
+            <div class="col"><b>Category:</b> {{listing.category}}</div>
+            <div class="w-100" id="spacer"></div>
+            <div class="col"><b>Description:</b> {{listing.description}}
+            </div>
+            <div class="w-100"></div>
+            <div class="col" id="padupbtn"><h4>Current bid: {{bids.sub_bid}}</h4>
+            <p>Starting bid was ${{listing.startbid}}</p></div>
+            <div class="w-100"></div>
+            <div class="col" id="padupbtn"><button type="button" class="btn btn-primary">{{wtf.quick_form(watchform)}}</button></div>
+            <div class="w-100"></div>
+            <div class="col" id="padup">Posted: {{listing.created_at}}</div>
+        </div>
+        </div>
+    </div>
+    
+</div>
+{{wtf.quick_form(bidform)}}
+</div>
+</div>
+{% endblock %}
